@@ -1,0 +1,1 @@
+document.write('<script src="photo3_0.js"></script><script src="photo3_1.js"></script><script src="photo3_2.js"></script><script src="photo3_3.js"></script>');
