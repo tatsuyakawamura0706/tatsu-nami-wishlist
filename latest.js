@@ -1,5 +1,8 @@
 // Latest UI behavior layered over the Supabase data adapter in app.js
 window.addEventListener('load',()=>{
+  const cover=document.getElementById('memoryCover');
+  if(cover && window.__MEMORY_PHOTO) cover.src=window.__MEMORY_PHOTO;
+
   // iPad / Safari 日本語IME対策
   document.querySelectorAll('input[type="text"],textarea:not([readonly])').forEach(field=>{
     field.setAttribute('lang','ja'); field.setAttribute('inputmode','text'); field.setAttribute('autocapitalize','off'); field.spellcheck=false;
