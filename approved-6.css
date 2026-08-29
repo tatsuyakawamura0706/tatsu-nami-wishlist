@@ -1,0 +1,214 @@
+.category-filters .filter-btn::before,
+.category-filters .filter-btn::after,
+.category-filters .filter-btn:first-child::before,
+.category-filters .filter-btn:first-child::after{
+  content:none!important;
+  display:none!important;
+}
+/* Only the actually selected category is highlighted */
+.category-filters .filter-btn.active{
+  color:#1677ff!important;
+  background:#eef5ff!important;
+  border:2px solid #1677ff!important;
+  box-shadow:0 8px 20px rgba(22,119,255,.10)!important;
+}
+/* Keep all button text visible */
+.category-filters .filter-btn{
+  text-indent:0!important;
+  font-size:14px!important;
+  font-weight:700!important;
+}
+
+
+/* The mockup layout used !important on main-view display, so hidden could not win. */
+#mainView.hidden{display:none!important}
+#memoriesView{display:none!important}
+#memoriesView.active{display:block!important}
+
+
+.apple-empty{
+  min-height:210px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:12px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  color:#8e8e93!important;
+}
+.apple-empty .empty-state-icon{display:none!important}
+.apple-empty p{
+  margin:0!important;
+  font-size:14px!important;
+  font-weight:500!important;
+  color:#8e8e93!important;
+}
+.apple-empty button{
+  border:0!important;
+  background:transparent!important;
+  color:#007aff!important;
+  font:inherit!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  padding:4px 8px!important;
+  cursor:pointer!important;
+}
+.apple-empty button:active{opacity:.55!important}
+@media(max-width:899px){
+  .apple-empty{min-height:180px!important}
+}
+
+
+.apple-empty button{display:none!important}
+
+
+/* ===== Interaction reset: desktop click + mobile tap ===== */
+html, body {
+  overflow-x: hidden !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button, .tab, .filter-btn, .memory-entry-final, .item-card {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+button, [role="button"], .tab, .filter-btn, .memory-entry-final {
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+}
+
+/* Never let decorative layers block taps */
+.item-card::before,
+.item-card::after,
+.memory-entry-final::before,
+.memory-entry-final::after,
+.tab::before,
+.tab::after,
+.filter-btn::before,
+.filter-btn::after {
+  pointer-events: none !important;
+}
+
+/* Explicit stacking order */
+header,
+.tabs,
+.category-filters,
+.items-container,
+.memory-entry-final,
+.fab-add {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.fab-add {
+  position: fixed !important;
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+}
+
+.tab,
+.filter-btn,
+.mock-check,
+.more-btn,
+.delete-btn,
+.move-btn,
+.back-btn,
+.period-btn,
+.category-btn,
+.person-btn,
+.add-btn,
+.close-modal,
+.memory-entry-final,
+.memory-link-final {
+  pointer-events: auto !important;
+}
+
+/* Hidden views must truly disappear; active view must receive taps */
+#mainView.hidden {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+#memoriesView {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+#memoriesView.active {
+  display: block !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* Modal layers */
+.modal-backdrop,
+.rating-modal {
+  z-index: 2000 !important;
+}
+
+.modal-backdrop.active,
+.rating-modal.active {
+  pointer-events: auto !important;
+}
+
+.add-modal,
+.rating-modal-content {
+  position: relative !important;
+  z-index: 2001 !important;
+  pointer-events: auto !important;
+}
+
+/* Mobile-specific safeguards */
+@media (max-width: 899px) {
+  .container {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .main-view {
+    position: relative !important;
+    z-index: 1 !important;
+    overflow: visible !important;
+  }
+
+  .tabs,
+  .category-filters {
+    position: relative !important;
+    z-index: 5 !important;
+  }
+
+  .items-container {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  .memory-entry-final {
+    position: relative !important;
+    top: auto !important;
+    z-index: 2 !important;
+  }
+
+  .tab,
+  .filter-btn {
+    min-height: 44px !important;
+  }
+
+  .mock-check,
+  .more-btn,
+  .back-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .fab-add {
+    right: max(18px, env(safe-area-inset-right)) !important;
+    bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)) !important;
+  }
+}
