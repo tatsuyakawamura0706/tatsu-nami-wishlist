@@ -1,0 +1,1 @@
+window.__MEMORY_PHOTO='data:image/jpeg;base64,'+(window.__MEMORY_PHOTO_B64||'');
