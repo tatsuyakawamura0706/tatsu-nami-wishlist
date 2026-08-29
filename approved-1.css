@@ -1,0 +1,376 @@
+
+        @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap");
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-card: #151933;
+            --bg-hover: #1d2340;
+            --text-primary: #e4e6f0;
+            --text-secondary: #9799b5;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #7b61ff;
+            --accent-person1: #ff6b9d;
+            --accent-person2: #ffa500;
+            --success: #00ff88;
+            --border: #2a2f52;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #f5f7fa;
+            --bg-card: #ffffff;
+            --bg-hover: #f0f2f5;
+            --text-primary: #1a1d2e;
+            --text-secondary: #6b7280;
+            --accent-primary: #0066cc;
+            --accent-secondary: #6366f1;
+            --accent-person1: #ec4899;
+            --accent-person2: #f59e0b;
+            --success: #10b981;
+            --border: #e5e7eb;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        [data-theme="sunset"] {
+            --bg-primary: #1a0f1f;
+            --bg-card: #2d1b2e;
+            --bg-hover: #3d2740;
+            --text-primary: #ffeef8;
+            --text-secondary: #c4a5c0;
+            --accent-primary: #ff6b9d;
+            --accent-secondary: #9d4edd;
+            --accent-person1: #ff8fab;
+            --accent-person2: #ffbe0b;
+            --success: #06ffa5;
+            --border: #4a2c4f;
+            --shadow: 0 8px 32px rgba(157, 78, 221, 0.3);
+        }
+        
+        [data-theme="forest"] {
+            --bg-primary: #0f1d13;
+            --bg-card: #1a2f21;
+            --bg-hover: #243d2f;
+            --text-primary: #e8f5e9;
+            --text-secondary: #a5c9b0;
+            --accent-primary: #4ade80;
+            --accent-secondary: #22c55e;
+            --accent-person1: #f59e0b;
+            --accent-person2: #06b6d4;
+            --success: #86efac;
+            --border: #2d4a35;
+            --shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
+        }
+        
+        body {
+            font-family: "Noto Sans JP", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+        
+        h1 {
+            font-family: "Outfit", sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+        
+        .input-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        input[type="text"],
+        input[type="date"] {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-family: "Noto Sans JP", sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus,
+        input[type="date"]:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        .person-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .person-btn {
+            padding: 14px 24px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Noto Sans JP", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .person-btn.active-person1 {
+            background: var(--accent-person1);
+            color: white;
+            border-color: var(--accent-person1);
+            box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+        }
+        
+        .person-btn.active-person2 {
+            background: var(--accent-person2);
+            color: white;
+            border-color: var(--accent-person2);
+            box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+        }
+        
+        .person-btn:hover:not(.active-person1):not(.active-person2) {
+            background: var(--bg-hover);
+            border-color: var(--accent-primary);
+        }
+        
+        .add-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Noto Sans JP", sans-serif;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+        
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 18px 24px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .tab.active::before {
+            transform: scaleX(1);
+        }
+        
+        .tab.active {
+            background: var(--bg-hover);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        
+        .tab:hover:not(.active) {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+        
+        .tab-count {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 10px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        
+        .tab.active .tab-count {
+            background: var(--accent-primary);
+        }
+        
+        .items-container {
+            display: grid;
+            gap: 15px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+        
+        .item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-primary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .item-card:hover {
+            background: var(--bg-hover);
+            transform: translateX(4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .item-card:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            flex: 1;
+        }
+        
+        .item-meta {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .person-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .person-badge.person1 {
+            background: var(--accent-person1);
+        }
+        
+        .person-badge.person2 {
+            background: var(--accent-person2);
+        }
+        
+        .item-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .complete-btn {
+            padding: 8px 18px;
+            background: var(--success);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Noto Sans JP", sans-serif;
+        }
+        
+        
