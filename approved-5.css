@@ -1,0 +1,293 @@
+.memory-stat:last-child{border-right:0!important}
+.memory-month{color:var(--blue)!important;font-size:19px!important;margin:26px 2px 12px!important}
+.memory-card{display:grid!important;grid-template-columns:56px minmax(0,1fr)!important;gap:14px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:18px!important;padding:17px!important;box-shadow:0 5px 16px rgba(31,42,68,.045)!important;margin-bottom:12px!important}
+.memory-date{color:var(--text)!important;text-align:center!important;font-size:11px!important}
+.memory-date strong{display:block!important;font-size:21px!important}
+.memory-rating{margin-top:10px!important}.star{color:var(--orange)!important;letter-spacing:2px!important}.rating-text{color:var(--muted)!important;font-size:12px!important;margin-left:8px!important}
+.memory-actions{margin-top:12px!important}
+.add-modal,.rating-modal-content{background:#fff!important;border-radius:26px!important}
+.modal-backdrop,.rating-modal{backdrop-filter:blur(16px)!important;background:rgba(246,248,251,.78)!important}
+.quick-periods{grid-template-columns:repeat(4,1fr)!important}.period-btn,.category-btn,.person-btn{background:#fff!important;color:#475467!important;border:1px solid var(--line)!important}
+.period-btn.active,.category-btn.active{background:var(--blue-soft)!important;color:var(--blue)!important;border-color:#d9e8ff!important}
+.person-btn.active-person1{background:var(--blue)!important;color:#fff!important;border-color:var(--blue)!important}
+.person-btn.active-person2{background:var(--pink)!important;color:#fff!important;border-color:var(--pink)!important}
+
+@media(max-width:899px){
+  .container{max-width:430px!important;padding:22px 16px 110px!important}
+  header{margin-bottom:20px!important}
+  h1{font-size:22px!important;white-space:nowrap!important}
+  .subtitle{font-size:13px!important}
+  .main-view{display:grid!important;grid-template-columns:1fr!important;grid-template-areas:"tabs" "filters" "items" "memory"!important;gap:14px!important}
+  .tabs{position:static!important;border-radius:18px!important}
+  .tab{font-size:14px!important;padding:12px 3px!important}
+  .category-filters{grid-template-columns:repeat(5,92px)!important;overflow-x:auto!important;scrollbar-width:none!important;padding:2px 0 5px!important}
+  .category-filters::-webkit-scrollbar{display:none}
+  .filter-btn{min-height:76px!important;font-size:12px!important}
+  .item-card{grid-template-columns:56px minmax(0,1fr) 28px!important;padding:17px 14px!important}
+  .item-icon{width:52px;height:52px;font-size:23px}
+  .item-title{font-size:16px!important}
+  .memory-entry{position:static!important;margin-top:4px!important}
+  .fab-add{right:20px!important;bottom:24px!important;width:58px!important;height:58px!important}
+  .memory-stats{grid-template-columns:repeat(4,1fr)!important}
+}
+
+
+/* Approved layout: no photos in memory cards */
+.memory-card img,.memory-item img,.memory-photo,.memory-thumb,.memory-image{display:none!important}
+
+/* Desktop: use width efficiently, like the approved reference */
+@media (min-width:900px){
+  .container{max-width:1240px!important;padding:32px 34px 110px!important}
+  .main-view{
+    grid-template-columns:minmax(560px,1.18fr) minmax(390px,.82fr)!important;
+    column-gap:34px!important;
+  }
+  .items-container{
+    border:1px solid var(--line)!important;
+    border-radius:20px!important;
+    overflow:hidden!important;
+    gap:0!important;
+    background:#fff!important;
+    box-shadow:0 6px 18px rgba(31,42,68,.05)!important;
+  }
+  .item-card{
+    border:0!important;
+    border-bottom:1px solid var(--line)!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    min-height:94px!important;
+  }
+  .item-card:last-child{border-bottom:0!important}
+  .memory-entry{position:sticky!important;top:28px!important}
+}
+
+/* Mobile: mirror the approved iPhone layout */
+@media (max-width:899px){
+  body{background:#fff!important}
+  .container{background:#fff!important;max-width:430px!important;padding:22px 15px 104px!important}
+  .tabs{box-shadow:0 5px 16px rgba(31,42,68,.055)!important}
+  .items-container{gap:10px!important}
+  .item-card{min-height:118px!important}
+  .memory-entry{box-shadow:0 5px 16px rgba(31,42,68,.05)!important}
+}
+
+/* Memories: date + category + title + rating + note, full width */
+.memory-card{
+  grid-template-columns:58px minmax(0,1fr)!important;
+  min-height:118px!important;
+}
+.memory-card > *{min-width:0}
+.memory-card .memory-content{width:100%!important}
+
+
+html,body{background:#fff!important}
+.container{background:#fff!important}
+:root{--bg:#fff!important}
+.main-view,.memories-view{background:#fff!important}
+
+/* Only the home memories summary carries the Miyakojima photo */
+.memory-entry{
+  position:relative!important;
+  min-height:320px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  overflow:hidden!important;
+  color:#fff!important;
+  border:0!important;
+  background:
+    linear-gradient(to top,rgba(0,0,0,.58) 0%,rgba(0,0,0,.18) 48%,rgba(0,0,0,.02) 76%),
+    url("") center 44%/cover no-repeat!important;
+  box-shadow:0 10px 30px rgba(16,24,40,.12)!important;
+}
+.memory-entry .memory-title{
+  position:relative!important;z-index:2!important;
+  color:#fff!important;text-shadow:0 1px 5px rgba(0,0,0,.25)!important;
+  font-size:22px!important;padding:22px 22px 5px!important;
+}
+.memory-entry .memory-sub{
+  position:relative!important;z-index:2!important;
+  color:rgba(255,255,255,.92)!important;padding:0 22px 20px!important;
+}
+.memory-entry::after{
+  position:relative!important;z-index:2!important;
+  color:rgba(255,255,255,.86)!important;
+  border-top:1px solid rgba(255,255,255,.35)!important;
+  margin:0 22px 20px!important;
+}
+.memory-entry::before{display:none!important}
+
+/* Individual memory cards remain photo-free and white */
+.memory-card,.memory-item{
+  background:#fff!important;color:#162033!important;
+  border:1px solid #eceff3!important;
+  box-shadow:0 4px 14px rgba(16,24,40,.045)!important;
+}
+.memory-card img,.memory-item img,.memory-photo,.memory-thumb,.memory-image{display:none!important}
+
+/* Neutral Apple-like surfaces; blue is only an accent */
+.tabs,.item-card,.category-filters .filter-btn,.memory-summary{
+  background:#fff!important;
+}
+.item-card,.tabs,.filter-btn,.memory-summary{
+  border-color:#eceff3!important;
+}
+@media(min-width:900px){
+  .memory-entry{min-height:390px!important}
+}
+@media(max-width:899px){
+  .memory-entry{min-height:245px!important}
+}
+
+
+/* category: restore visible "すべて" label/icon even when legacy markup is sparse */
+.category-filters .filter-btn:first-child{
+  position:relative!important;
+  color:transparent!important;
+}
+.category-filters .filter-btn:first-child::after{
+  content:"⌘  すべて";
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  color:#1677ff;font-size:14px;font-weight:700;
+}
+.category-filters .filter-btn:first-child.active::after{color:#fff}
+
+/* memories summary: photo is visual only; keep stats readable in a separate white panel */
+.memory-entry{
+  min-height:360px!important;
+  justify-content:flex-end!important;
+}
+.memory-entry .memory-title{
+  background:rgba(255,255,255,.96)!important;
+  color:#162033!important;
+  text-shadow:none!important;
+  margin:0!important;
+  padding:18px 20px 5px!important;
+}
+.memory-entry .memory-sub{
+  background:rgba(255,255,255,.96)!important;
+  color:#1677ff!important;
+  padding:0 20px 12px!important;
+  margin:0!important;
+}
+.memory-entry::after{
+  content:"これまでの思い出　　平均満足度"!important;
+  background:rgba(255,255,255,.96)!important;
+  color:#778195!important;
+  border-top:1px solid #eceff3!important;
+  margin:0!important;
+  padding:13px 20px 18px!important;
+}
+@media(max-width:899px){
+  .memory-entry{min-height:300px!important}
+}
+
+
+/* CATEGORY: use the actual button text; no pseudo replacement */
+.category-filters .filter-btn:first-child,
+.category-filters .filter-btn:first-child.active{
+  color:#1677ff!important;
+  background:#fff!important;
+  border:2px solid #1677ff!important;
+  position:relative!important;
+}
+.category-filters .filter-btn:first-child::after{content:none!important;display:none!important}
+.category-filters .filter-btn:first-child.active{
+  background:#1677ff!important;
+  color:#fff!important;
+}
+
+/* HOME MEMORY CARD: explicit image on top, white information panel below */
+.memory-entry-final{
+  display:block!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#fff!important;
+  border:1px solid #eceff3!important;
+  border-radius:22px!important;
+  color:#162033!important;
+  text-align:left!important;
+  box-shadow:0 8px 24px rgba(16,24,40,.07)!important;
+  position:sticky!important;
+  top:28px!important;
+}
+.memory-entry-final::before,.memory-entry-final::after{content:none!important;display:none!important}
+.memory-cover-final{
+  display:block!important;
+  width:100%!important;
+  height:250px!important;
+  object-fit:cover!important;
+  object-position:center 43%!important;
+  margin:0!important;
+}
+.memory-info-final{
+  display:block!important;
+  background:#fff!important;
+  padding:18px 20px 17px!important;
+}
+.memory-entry-final .memory-title{
+  padding:0!important;
+  margin:0 0 16px!important;
+  color:#162033!important;
+  text-shadow:none!important;
+  font-size:18px!important;
+  line-height:1.35!important;
+}
+.memory-metrics-final{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:16px!important;
+  padding:0 0 15px!important;
+}
+.memory-metrics-final div{min-width:0!important}
+.memory-metrics-final span{
+  display:block!important;
+  color:#778195!important;
+  font-size:11px!important;
+  margin-bottom:5px!important;
+}
+.memory-metrics-final strong{
+  display:block!important;
+  color:#162033!important;
+  font-size:20px!important;
+  font-weight:760!important;
+}
+.memory-link-final{
+  border-top:1px solid #eceff3!important;
+  padding-top:13px!important;
+  color:#1677ff!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+}
+.memory-link-final span{font-size:22px!important;line-height:1!important;color:#1677ff!important}
+
+@media(max-width:899px){
+  .memory-entry-final{position:static!important}
+  .memory-cover-final{height:190px!important}
+  .memory-info-final{padding:16px 17px 15px!important}
+}
+
+
+.memory-metrics-final{display:none!important}
+.memory-entry-final .memory-title{margin-bottom:12px!important}
+
+
+header .subtitle{display:none!important}
+header{margin-bottom:18px!important}
+
+
+/* Reset category buttons */
+.category-filters .filter-btn,
+.category-filters .filter-btn:first-child{
+  position:relative!important;
+  color:#667085!important;
+  background:#fff!important;
+  border:1px solid #e7ebf1!important;
+  box-shadow:0 5px 16px rgba(31,42,68,.045)!important;
+}
