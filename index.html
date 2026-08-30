@@ -1831,11 +1831,31 @@ header,
           const text=document.getElementById('quickItemInput').value.trim();
           if(!text) return alert('やりたいことを入力してください');
           if(!quickPerson) return alert('発案者を選択してください');
-          try{ const itemRef=db.collection('wishlist').doc(); await itemRef.set({text, person:quickPerson, period:selectedPeriod, category:selectedCategory, completed:false, createdAt:Date.now(), date:null}); document.getElementById('quickItemInput').value=''; closeAddModal(); switchTab(selectedPeriod); }catch(error){ alert('追加エラー: '+error.message); }
+          try{
+            const itemRef=db.collection('wishlist').doc();
+            await itemRef.set({
+              text,
+              person:quickPerson,
+              period:selectedPeriod,
+              category:selectedCategory,
+              completed:false,
+              createdAt:Date.now(),
+              date:null
+            });
+            document.getElementById('quickItemInput').value='';
+            closeAddModal();
+            currentTab = selectedPeriod;
+            document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === selectedPeriod));
+            await refreshItemsNow();
+          }catch(error){
+            console.error('追加エラー:', error);
+            alert('追加エラー: '+error.message);
+          }
         };
         window.moveItem = async function(itemId, period){
           const item=items.find(i=>i.id===itemId); if(!item) return;
           await db.collection('wishlist').doc(itemId).set({...item,period});
+          await refreshItemsNow();
         };
 
         window.changeTheme = function(theme) {
@@ -2049,16 +2069,30 @@ header,
         });
 
         // アイテムを読み込み
+        async function refreshItemsNow() {
+            const { data, error } = await supabaseClient
+                .from('wishlist_items')
+                .select('*')
+                .order('created_at', { ascending: false });
+            if (error) throw error;
+            items = (data || []).map(rowToItem);
+            items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            renderItems();
+            if (document.getElementById('memoriesView')?.classList.contains('active')) {
+                renderMemories();
+            }
+        }
+
         function loadItems() {
-            const itemsRef = db.collection('wishlist');
-            itemsRef.onSnapshot((snapshot) => {
-                items = [];
-                snapshot.forEach((doc) => {
-                    items.push({ id: doc.id, ...doc.data() });
-                });
-                items.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                renderItems();
-            });
+            refreshItemsNow().catch(error => console.error('Supabase読込エラー:', error));
+
+            // Realtimeが有効な環境では他端末からの変更も自動反映
+            supabaseClient
+                .channel('wishlist-items-ui-sync-live')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'wishlist_items' }, () => {
+                    refreshItemsNow().catch(error => console.error('Supabase再読込エラー:', error));
+                })
+                .subscribe();
         }
 
         // アイテムを描画
